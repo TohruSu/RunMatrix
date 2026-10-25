@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Storefront · session change">
+  <testsuite name="Authentication">
+    <testcase classname="auth.SessionTest" name="signs in with valid credentials" time="0.121" />
+    <testcase classname="auth.SessionTest" name="rejects an expired token" time="0.040"><failure message="Expected 401, received 200" type="AssertionError">SessionTest.ts:48
+The expired token was accepted by the synthetic session handler.</failure></testcase>
+    <testcase classname="auth.SessionTest" name="refreshes the session" time="0.207"><failure message="Expected a fresh access token" type="AssertionError">SessionTest.ts:83
+Expected: token-v2
+Received: token-v1
+The refresh response reused the previous token.</failure></testcase>
+  </testsuite>
+  <testsuite name="Checkout">
+    <testcase classname="checkout.CartTest" name="calculates the order total" time="0.024" />
+    <testcase classname="checkout.CartTest" name="applies a promotion code" time="0.033"><failure message="Expected total 90.00, received 100.00" type="AssertionError">CartTest.ts:72
+Promotion WELCOME10 was not applied.</failure></testcase>
+    <testcase classname="checkout.PaymentTest" name="returns a payment receipt" time="0.302" />
+    <testcase classname="checkout.PaymentTest" name="retries the payment gateway" time="1.5"><error message="Gateway did not respond within 1500 ms" type="TimeoutError">PaymentTest.ts:119
+Synthetic gateway timeout on attempt 2 of 2.</error></testcase>
+  </testsuite>
+  <testsuite name="Search">
+    <testcase classname="search.SearchTest" name="suggests matching products"><skipped message="Suggestion fixture is not enabled" /></testcase>
+    <testcase classname="search.SearchTest" name="supports keyboard navigation"><skipped message="Keyboard fixture is temporarily unavailable" /></testcase>
+  </testsuite>
+  <testsuite name="Catalog"><testsuite name="EmptyCatalog"><testcase name="renders an empty catalog" time="0.013" /></testsuite></testsuite>
+  <testsuite name="Profile"><testcase classname="profile.ProfileTest" name="saves the display name" time="0.102" /></testsuite>
+</testsuites>

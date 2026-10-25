@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="Storefront · gateway update">
+  <testsuite name="Authentication">
+    <testcase classname="auth.SessionTest" name="signs in with valid credentials" time="0.122" />
+    <testcase classname="auth.SessionTest" name="rejects an expired token" time="0.039"><failure message="Expected 401, received 200" type="AssertionError">SessionTest.ts:48
+The expired token was accepted.</failure></testcase>
+    <testcase classname="auth.SessionTest" name="refreshes the session" time="0.008"><error message="Session fixture could not be initialized" type="FixtureError">SessionTest.ts:12
+Synthetic refresh fixture is missing its signing key.</error></testcase>
+  </testsuite>
+  <testsuite name="Checkout">
+    <testcase classname="checkout.CartTest" name="calculates the order total" time="0.024" />
+    <testcase classname="checkout.CartTest" name="applies a promotion code" time="0.031"><failure message="Expected total 90.00, received 100.00" type="AssertionError">CartTest.ts:72
+Promotion WELCOME10 was not applied.</failure></testcase>
+    <testcase classname="checkout.PaymentTest" name="returns a payment receipt" time="0.277"><failure message="Receipt is missing its order reference" type="AssertionError">PaymentTest.ts:64
+Expected orderId: order-1042
+Received orderId: null</failure></testcase>
+    <testcase classname="checkout.PaymentTest" name="retries the payment gateway" time="0.423" />
+  </testsuite>
+  <testsuite name="Search">
+    <testcase classname="search.SearchTest" name="suggests matching products"><skipped message="Suggestion fixture is not enabled" /></testcase>
+    <testcase classname="search.SearchTest" name="supports keyboard navigation" time="0.084" />
+  </testsuite>
+  <testsuite name="Catalog">
+    <testcase classname="catalog.StockTest" name="shows stock availability" time="0.060" />
+    <testsuite name="EmptyCatalog"><testcase name="renders an empty catalog" time="0.011" /></testsuite>
+  </testsuite>
+</testsuites>
